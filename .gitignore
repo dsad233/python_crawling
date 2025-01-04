@@ -1,0 +1,4 @@
+.venv
+poetry.lock
+pyvenv.cfg
+.DS_Store
