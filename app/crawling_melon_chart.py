@@ -11,28 +11,42 @@ data = requests.get('https://www.melon.com/chart/',headers=headers)
 soup = BeautifulSoup(data.text, 'html.parser')
 
 setTop50 = soup.select("#lst50 > td > div")
-file_path = "melon_chart_50.txt"
+setTop100 = soup.select("#lst100 > td > div")
 
 rankArray = []
 titleArray = []
 artistArray = []
 saveData = []
-for i in setTop50 :
-    rank = i.select_one("#lst50 > td:nth-child(2) > div > span.rank")
+for data in setTop50 :
+    rank = data.select_one("td:nth-child(2) > div > span.rank")
     if(rank is not None):
         rankArray.append(rank.text)
 
-    title = i.select_one("#lst50 > td:nth-child(6) > div > div > div.ellipsis.rank01 > span > a")
+    title = data.select_one("td:nth-child(6) > div > div > div.ellipsis.rank01 > span > a")
     if(title is not None):
         titleArray.append(title.text)
 
-    artist = i.select_one("#lst50 > td:nth-child(6) > div > div > div.ellipsis.rank02 > a")
+    artist = data.select_one("td:nth-child(6) > div > div > div.ellipsis.rank02 > a")
+    if(artist is not None):
+        artistArray.append(artist.text)
+
+for data in setTop100:
+    rank = data.select_one("td:nth-child(2) > div > span.rank")
+    if(rank is not None):
+        rankArray.append(rank.text)
+
+    title = data.select_one("td:nth-child(6) > div > div > div.ellipsis.rank01 > span > a")
+    if(title is not None):
+        titleArray.append(title.text)
+
+    artist = data.select_one("td:nth-child(6) > div > div > div.ellipsis.rank02 > a")
     if(artist is not None):
         artistArray.append(artist.text)
 
 for j, k, n in zip(rankArray, titleArray, artistArray):
     saveData.append({ "rank" : j, "title" : k, "artist" : n })
 
+file_path = "melon_chart_50.txt"
 with open(f"{os.environ.get('DOWNLOAD_PATH')}{file_path}", "w") as file:
     file.write(json.dumps(saveData, indent=4, ensure_ascii=False))
 

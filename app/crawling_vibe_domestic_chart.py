@@ -20,22 +20,23 @@ rankArray = []
 titleArray = []
 artistArray = []
 saveArray = []
+
+set_directory = driver.find_elements(By.CSS_SELECTOR, "#content > div.track_section > div:nth-child(2) > div > table > tbody > tr")
+
 try :
-    rank = driver.find_elements(By.CSS_SELECTOR, "#content > div.track_section > div:nth-child(2) > div > table > tbody > tr > td > span.text")
-    for data in rank:
-        if(data.text != ""):
-            rankArray.append(data.text)
+    for data in set_directory:
+        rank = data.find_element(By.CSS_SELECTOR, "td > span.text").text
+        if(rank):
+            rankArray.append(rank)
 
-    title = driver.find_elements(By.CSS_SELECTOR, "#content > div.track_section > div:nth-child(2) > div > table > tbody > tr > td.song > div > span > a")
-    for data in title:
-        if(data.text != ""):
-            titleArray.append(data.text)
-
-    artist = driver.find_elements(By.CSS_SELECTOR, "#content > div.track_section > div:nth-child(2) > div > table > tbody > tr > td.song > div.artist_sub > span.artist_sub_inner > span > a")
-    for data in artist:
-        if(data.text != ""):
-            artistArray.append(data.text)
+        title = data.find_element(By.CSS_SELECTOR, "td.song > div > span > a").text
+        if(title):
+            titleArray.append(title)
     
+        artist = data.find_element(By.CSS_SELECTOR, "td.song > div.artist_sub > span.artist_sub_inner > span > a").text
+        if(artist):
+            artistArray.append(artist)
+        
     for j, k, n in zip(rankArray, titleArray, artistArray):
         saveArray.append({ "rank" : j, "title" : k, "artist" : n })
 
