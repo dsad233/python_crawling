@@ -46,7 +46,7 @@ for data in setTop100:
 for j, k, n in zip(rankArray, titleArray, artistArray):
     saveData.append({ "rank" : j, "title" : k, "artist" : n })
 
-file_path = "melon_chart_50.txt"
+file_path = "melon_chart_100.txt"
 with open(f"{os.environ.get('DOWNLOAD_PATH')}{file_path}", "w") as file:
     file.write(json.dumps(saveData, indent=4, ensure_ascii=False))
 
