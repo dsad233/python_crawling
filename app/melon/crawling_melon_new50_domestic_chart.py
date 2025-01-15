@@ -29,8 +29,7 @@ try :
 
         artist = data.select("td:nth-child(5) > div > div > div.ellipsis.rank02 > a")
         if(len(artist) > 1):
-            for i in artist:
-                artist_array.append([i.text for i in artist])
+            artist_array.append([i.text for i in artist])
         else :
             for i in artist:
                 artist_array.append(i.text)

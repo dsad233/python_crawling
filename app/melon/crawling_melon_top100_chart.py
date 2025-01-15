@@ -20,17 +20,20 @@ save_array = []
 
 try:
     for data in setTop_50 :
-        rank = data.select_one("td:nth-child(2) > div.wrap.t_center > span.rank")
+        rank = data.select_one("td:nth-child(2) > div.wrap.t_center > span.rank").text
         if(rank):
-            rank_array.append(rank.text)
+            rank_array.append(rank)
 
-        title = data.select_one("td:nth-child(6) > div.wrap > div.wrap_song_info > div.ellipsis.rank01 > span > a")
+        title = data.select_one("td:nth-child(6) > div.wrap > div.wrap_song_info > div.ellipsis.rank01 > span > a").text
         if(title):
-            title_array.append(title.text)
+            title_array.append(title)
 
         artist = data.select_one("td:nth-child(6) > div.wrap > div.wrap_song_info > div.ellipsis.rank02 > a")
-        if(artist):
-            artist_array.append(artist.text)
+        if(len(artist) >= 2):
+            artist_array.append([i.text for i in artist])
+        else :
+            for i in artist:
+                artist_array.append(i.text)
 
     for data in setTop_100:
         rank = data.select_one("td:nth-child(2) > div.wrap.t_center > span.rank")
@@ -42,7 +45,7 @@ try:
             title_array.append(title.text)
 
         artist = data.select_one("td:nth-child(6) > div.wrap > div.wrap_song_info > div.ellipsis.rank02 > a")
-        if(len(artist) >= 2):
+        if(len(artist) > 1):
             artist_array.append([i.text for i in artist])
         else :
             for i in artist:
