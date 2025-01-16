@@ -38,6 +38,12 @@
   </code>
   </pre>
 
+  <pre>
+  <code>
+  poetry shell
+  </code>
+  </pre>
+
 - **.env**
 
   <pre>
