@@ -49,12 +49,12 @@ try:
         if(release_date):
             release_date_array.append(release_date)
 
-        for j, k, n in zip(title_array, artist_array, release_date_array):
-            save_array.append({ "title" : j, "artist" : k, "release_date" : n })
+    for j, k, n in zip(title_array, artist_array, release_date_array):
+        save_array.append({ "title" : j, "artist" : k, "release_date" : n })
 
-        file_path = "melon_new_domestic_all_list.txt"
-        with open(f"{os.environ.get('DOWNLOAD_PATH')}{file_path}", "w", encoding="utf-8") as file:
-            file.write(json.dumps(save_array, indent=4, ensure_ascii=False))
+    file_path = "melon_new_domestic_all_list.txt"
+    with open(f"{os.environ.get('DOWNLOAD_PATH')}{file_path}", "w", encoding="utf-8") as file:
+        file.write(json.dumps(save_array, indent=4, ensure_ascii=False))
 except Exception as err:
     print(err)
     print("에러 발생")
