@@ -1,7 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from dotenv import load_dotenv
 import os
 import json
@@ -23,12 +21,13 @@ while True:
     try:
         # 더보기 클릭
         driver.find_element(By.CSS_SELECTOR, "#content > div > div.sub_list > div.btn_more_list > a.link").click()
-    except Exception as e:
+    except Exception as err:
         break
 
     sleep(0.5)
-    
-sleep(2)
+
+
+driver.implicitly_wait(time_to_wait=3)
 set_directory = driver.find_elements(By.CSS_SELECTOR, "#content > div > div.sub_list > ul > li.list_item")
 
 title_array = []
@@ -39,14 +38,12 @@ try:
     for data in set_directory:
 
         title = data.find_element(By.CSS_SELECTOR, "div > div.info > a > span.text_wrap > span.text").text
-        print(title)
         if(title):
             title_array.append(title)
 
         artist = data.find_element(By.CSS_SELECTOR, "div > div.info > div.artist > span.artist_sub_inner").text
         if(artist):
             artist_array.append(artist)
-
 
     for j, k in zip(title_array, artist_array):
         save_array.append({ "title" : j, "artist" : k })
