@@ -37,7 +37,7 @@ try :
     for j, k, n in zip(rank_array, title_array, artist_array):
         save_array.append({ "rank" : j, "title" : k, "artist" : n })
 
-    file_path = "melon_new50_domestic_chart.txt"
+    file_path = "melon_new50_domestic_list.txt"
     with open(f"{os.environ.get('DOWNLOAD_PATH')}{file_path}", "w", encoding="utf-8") as file:
         file.write(json.dumps(save_array, indent=4, ensure_ascii=False))
 except Exception as err:

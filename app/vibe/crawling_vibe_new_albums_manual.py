@@ -21,11 +21,9 @@ while True:
     try:
         # 더보기 클릭
         driver.find_element(By.CSS_SELECTOR, "#content > div > div.sub_list > div.btn_more_list > a.link").click()
-    except Exception as err:
+    except Exception:
         break
-
     sleep(0.5)
-
 
 driver.implicitly_wait(time_to_wait=3)
 set_directory = driver.find_elements(By.CSS_SELECTOR, "#content > div > div.sub_list > ul > li.list_item")
@@ -48,7 +46,7 @@ try:
     for j, k in zip(title_array, artist_array):
         save_array.append({ "title" : j, "artist" : k })
 
-    file_path = "vibe_new_album_manual.txt"
+    file_path = "vibe_new_albums_manual.txt"
     with open(f"{os.environ.get('DOWNLOAD_PATH')}{file_path}", "w", encoding="utf-8") as file:
         file.write(json.dumps(save_array, indent=4, ensure_ascii=False))
 except Exception as err:
