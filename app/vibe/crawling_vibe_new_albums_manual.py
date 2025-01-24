@@ -17,7 +17,11 @@ driver.find_element(By.CSS_SELECTOR, "#__modal-container > div > div > div > div
 while True:
     # 밑으로 스크롤
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
+    sleep(0.5)
+    scroll_save_point = driver.execute_script("return window.scrollY;")
+    # 위로 스크롤
+    driver.execute_script(f"window.scrollTo(0, {scroll_save_point - 100});")
+    sleep(0.5)
     try:
         # 더보기 클릭
         driver.find_element(By.CSS_SELECTOR, "#content > div > div.sub_list > div.btn_more_list > a.link").click()
