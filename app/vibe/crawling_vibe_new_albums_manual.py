@@ -47,7 +47,7 @@ try:
         save_array.append({ "title" : j, "artist" : k })
 
     file_path = "vibe_new_albums_manual.txt"
-    with open(f"{os.environ.get('DOWNLOAD_PATH')}{file_path}", "w", encoding="utf-8") as file:
+    with open(rf"{os.environ.get('DOWNLOAD_PATH')}\{file_path}", "w", encoding="utf-8") as file:
         file.write(json.dumps(save_array, indent=4, ensure_ascii=False))
 except Exception as err:
     print(err)

@@ -15,14 +15,11 @@ driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://www.melon.com/new/index.htm")
 driver.implicitly_wait(time_to_wait=7)
 
-title_array = []
-artist_array = []
-release_date_array = []
-save_array = []
 
 # 팝업창 닫기
 driver.find_element(By.CSS_SELECTOR, "body > div.melon-container.melon-container-fixed.melon-onboarding > main > div > a.btn-close").click()
 sleep(1)
+
 
 while True:
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
@@ -34,6 +31,11 @@ while True:
 
 set_directory = driver.find_elements(By.CSS_SELECTOR, "#_mList > li.list_item")
 sleep(1)
+
+title_array = []
+artist_array = []
+release_date_array = []
+save_array = []
 
 try:
     for data in set_directory:
@@ -53,7 +55,7 @@ try:
         save_array.append({ "title" : j, "artist" : k, "release_date" : n })
 
     file_path = "melon_new_domestic_all_list.txt"
-    with open(f"{os.environ.get('DOWNLOAD_PATH')}{file_path}", "w", encoding="utf-8") as file:
+    with open(rf"{os.environ.get('DOWNLOAD_PATH')}\{file_path}", "w", encoding="utf-8") as file:
         file.write(json.dumps(save_array, indent=4, ensure_ascii=False))
 except Exception as err:
     print(err)
