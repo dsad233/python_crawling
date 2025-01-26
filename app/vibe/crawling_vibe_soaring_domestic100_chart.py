@@ -40,7 +40,8 @@ try :
         save_array.append({ "rank" : j, "title" : k, "artist" : n })
 
     file_path = "vibe_soaring_domestic_chart_100.txt"
-    with open(rf"{os.environ.get('DOWNLOAD_PATH')}\{file_path}", "w", encoding="utf-8") as file:
+    file_full_path = os.path.join(os.environ.get('DOWNLOAD_PATH'), file_path)
+    with open(file_full_path, "w", encoding="utf-8") as file:
         file.write(json.dumps(save_array, indent=4, ensure_ascii=False))
 except Exception as err:
     print(err)
